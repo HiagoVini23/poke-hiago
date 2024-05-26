@@ -1,0 +1,82 @@
+<ion-content [fullscreen]="true">
+  <ion-card id="container">
+    <img [alt]="poke?.name" [src]="poke?.image" style="height: 150px;" />
+    <ion-button (click)="favorite =! favorite" color="warning" fill="clear" class="favorite-button">
+      <ion-icon slot="icon-only" [name]="favorite ? 'star' : 'star-outline'"></ion-icon>
+    </ion-button>
+    <ion-card-header>
+      <ion-card-title>#{{poke?.id}} {{poke?.name }}</ion-card-title>
+      <ion-card-subtitle>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              Weight: {{poke?.weight}}hg
+            </ion-col>
+            <ion-col>
+              Height: {{poke?.height}}dm
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content *ngIf="poke">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <ion-icon size="small" aria-hidden="true" name="heart" slot="start"></ion-icon>
+                <div class="detail-item">
+                  <ion-label>Health</ion-label>
+                  <ion-label>{{poke.stats[0].base_stat}}</ion-label>
+                </div>
+              </ion-item>
+              <ion-item>
+                <ion-icon size="small" aria-hidden="true" name="barbell" slot="start"></ion-icon>
+                <div class="detail-item">
+                  <ion-label>Attack</ion-label>
+                  <ion-label>{{poke.stats[1].base_stat}}</ion-label>
+                </div>
+              </ion-item>
+              <ion-item>
+                <ion-icon size="small" aria-hidden="true" name="shield-half" slot="start"></ion-icon>
+                <div class="detail-item">
+                  <ion-label>Defense</ion-label>
+                  <ion-label>{{poke.stats[2].base_stat}}</ion-label>
+                </div>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <ion-icon size="small" aria-hidden="true" name="flame" slot="start"></ion-icon>
+                <div class="detail-item">
+                  <ion-label>Special Attack</ion-label>
+                  <ion-label>{{poke.stats[3].base_stat}}</ion-label>
+                </div>
+              </ion-item>
+              <ion-item>
+                <ion-icon size="small" aria-hidden="true" name="shield" slot="start"></ion-icon>
+                <div class="detail-item">
+                  <ion-label>Special Defense</ion-label>
+                  <ion-label>{{poke.stats[4].base_stat}}</ion-label>
+                </div>
+              </ion-item>
+              <ion-item>
+                <ion-icon size="small" aria-hidden="true" name="speedometer" slot="start"></ion-icon>
+                <div class="detail-item">
+                  <ion-label>Speed</ion-label>
+                  <ion-label>{{poke.stats[4].base_stat}}</ion-label>
+                </div>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    <ion-button (click)="close()" shape="round" fill="clear">
+      <ion-icon size="large" slot="icon-only" name="close-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-card>
+</ion-content>

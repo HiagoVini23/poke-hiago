@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonContent, IonInfiniteScroll } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, IonContent, IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { PokemonService } from '../services/PokemonService';
 import { Pokemon } from '../models/Pokemon';
+import { DetailsPage } from '../details/details.page';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +12,17 @@ import { Pokemon } from '../models/Pokemon';
 export class HomePage implements OnInit {
   pokemons: Pokemon[] = [];
   offset = 0;
+  @ViewChild('modal', { static: true }) modal: any;
 
-  constructor(private pokemonService: PokemonService) { }
+  constructor(private pokemonService: PokemonService, 
+    private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.loadPokemons();
+  }
+
+  async dismiss() {
+    await this.modalCtrl.dismiss();
   }
 
   private async loadPokemons() {
@@ -30,6 +37,23 @@ export class HomePage implements OnInit {
     }
   }
 
+  async openModal(idPokemon: number, favorite: boolean) {
+    const modal = await this.modalCtrl.create({
+      component: DetailsPage,
+      componentProps: { idPokemon: idPokemon, favorite: favorite}
+    });
+    await modal.present();
+    let {data, role} = await modal.onWillDismiss();
+    this.updateFavorite(idPokemon, data)
+  }
+
+  updateFavorite(idPokemon: number, favorite: any){
+    const pokemonToUpdate = this.pokemons.find(pokemon => pokemon.id === idPokemon);
+    if(pokemonToUpdate!.favorite != favorite)
+      pokemonToUpdate!.favorite = favorite;
+  }
+
+
   getCardGroups() {
     const groups = [];
     for (let i = 0; i < this.pokemons.length; i += 4) {
@@ -38,14 +62,10 @@ export class HomePage implements OnInit {
     return groups;
   }
 
-  async onIonInfinite(ev: any) {
-    setTimeout(async () => {
-      await this.loadPokemons(); // Carrega mais pokémons
-      if (ev && ev.target) {
-        ev.target.complete(); // Completa o evento de rolagem infinita
-      } else {
-        console.error('Event target is null');
-      }
-    }, 1000);
+  onIonInfinite(ev: any) {
+    this.loadPokemons();
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 500);
   }
 }
