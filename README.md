@@ -19,15 +19,14 @@ Antes de começar, certifique-se de ter instalado os seguintes itens:
 Siga estas etapas para instalar e executar o projeto localmente:
 
 1. Clone o repositório:
-
+```
 $ git clone https://github.com/HiagoVini23/poke-hiago.git
-
+```
 2. Instale as dependências dentro da pasta 'frontend':
-
+```
 $ npm install
-
+```
 3. Inicie o servidor de desenvolvimento:
-
+```
 $ ionic serve
-
-
+```
