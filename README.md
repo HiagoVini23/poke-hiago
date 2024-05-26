@@ -1,6 +1,6 @@
 # PokeHiago
 
-Um site que permite listar os Pokémon existentes, favoritá-los e visualizar detalhes como peso, altura e estatísticas de batalha.
+Um site que permite listar os Pokémons existentes na API [PokeAPI](https://pokeapi.co/), favoritá-los e visualizar detalhes como peso, altura e estatísticas de batalha.
 
 ## Getting Started
 
@@ -30,3 +30,26 @@ $ npm install
 ```
 $ ionic serve
 ```
+## Estrutura de Pastas do Projeto
+
+- **src**: Diretório principal do código-fonte do aplicativo Ionic.
+  - **app**: Diretório que contém todas as páginas, componentes e módulos.
+    - **services**: Diretório que contém as funções que acessam a PokeAPI.
+    - **home**: Página que lista os pokémons.
+    - **details**: Página que lista os detalhes do pokémon selecionado.
+  - **assets**: Diretório onde contém o logo, fotos dos pokémons e fotos utilizadas no README.md.
+
+## Imagens
+
+<table>
+  <tr>
+    <td>
+      <img src="./frontend/src/assets/phone.png" alt="HomepagePhone" width="300">
+    </td>
+    <td>
+      <img src="./frontend/src/assets/phone.png" alt="HomepagePC" width="300">
+    </td>
+  </tr>
+</table>
+
+
