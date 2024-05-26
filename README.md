@@ -41,17 +41,14 @@ $ ionic serve
 
 ## Imagens
 
-Página de listagens dos Pokémons em Computador e Smartphone:
+- Página de listagem dos Pokémons:
 
-<table>
-  <tr>
-    <td>
-      <img src="./frontend/src/assets/phone.png" alt="HomepagePhone" width="200">
-    </td>
-    <td>
-      <img src="./frontend/src/assets/PC.png" alt="HomepagePC" width="400">
-    </td>
-  </tr>
-</table>
+| Mobile | Web |
+|--------|-----|
+| ![HomepagePhone](./frontend/src/assets/docs/HomePhone.png) | ![HomepagePC](./frontend/src/assets/docs/HomePC.png) |
 
+- Página de detalhe de um Pokémon:
 
+| Mobile | Web |
+|--------|-----|
+| ![HomepagePhone](./frontend/src/assets/docs/DetailPhone.png) | ![HomepagePC](./frontend/src/assets/docs/DetailPC.png) |
