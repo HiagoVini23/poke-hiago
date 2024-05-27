@@ -21,10 +21,6 @@ export class HomePage implements OnInit {
     this.loadPokemons();
   }
 
-  async dismiss() {
-    await this.modalCtrl.dismiss();
-  }
-
   private async loadPokemons() {
     try {
       const nextPokemons: Pokemon[] = await this.pokemonService.getPokemons(this.offset);

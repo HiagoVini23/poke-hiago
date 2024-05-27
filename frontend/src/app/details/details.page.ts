@@ -26,7 +26,6 @@ export class DetailsPage {
 
   async findPokemon(){
     this.poke = await this.pokemonService.getPokemonById(this.idPokemon) as Pokemon
-    console.log(this.poke)
   }
 
 }
