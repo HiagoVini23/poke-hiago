@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model pokemon {
+  id   Int    @id
+  name String 
+}
+
+model user {
+  id       Int    @id @default(autoincrement())
+  name     String 
+  nickname String 
+  email    String @unique
+  password String 
+}
+
+model user_fav_pokemon {
+  pokemon_id Int
+  user_id    Int
+
+  @@id([pokemon_id, user_id])
+  @@index([pokemon_id], map: "fk_pokemon_has_user_pokemon_idx")
+  @@index([user_id], map: "fk_pokemon_has_user_user1_idx")
+}
