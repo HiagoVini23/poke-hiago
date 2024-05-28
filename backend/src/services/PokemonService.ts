@@ -61,12 +61,16 @@ export class PokemonService {
 
     async findFavsByUser(idUser: number) {
         try {
-          const pokesFav = await prisma.user_fav_pokemon.findMany({
-            where:{
-                user_id: idUser
-            }
-          })
-          return { ok: true, message: "Found successfully!", data: pokesFav };
+            const pokesFav = await prisma.user_fav_pokemon.findMany({
+                where: {
+                  user_id: idUser,
+                },
+                select: {
+                  pokemon_id: true,
+                },
+              });          
+          const pokemonIds = pokesFav.map(fav => fav.pokemon_id);
+          return { ok: true, message: "Found successfully!", data: pokemonIds };
         } catch (error) {
             console.log(error);
             return { ok: false, message: "Internal error!", data: TypeErrorsEnum.Internal };
