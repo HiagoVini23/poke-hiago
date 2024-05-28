@@ -3,6 +3,8 @@ import { InfiniteScrollCustomEvent, IonContent, IonInfiniteScroll, ModalControll
 import { PokemonService } from '../services/PokemonService';
 import { Pokemon } from '../models/Pokemon';
 import { DetailsPage } from '../details/details.page';
+import { CustomResponse } from '../models/CustomResponse';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,43 +14,57 @@ import { DetailsPage } from '../details/details.page';
 export class HomePage implements OnInit {
   pokemons: Pokemon[] = [];
   offset = 0;
+  search = '';
+  limit = 50
+  pokemonsFavId: number[] = []
   @ViewChild('modal', { static: true }) modal: any;
 
-  constructor(private pokemonService: PokemonService, 
-    private modalCtrl: ModalController) { }
+  constructor(private pokemonService: PokemonService,
+    private modalCtrl: ModalController) { 
+    }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loadPokemons();
+    this.loadPokemonsFavs()
+  }
+
+  private async loadPokemonsFavs(){
+    const response: CustomResponse = await this.pokemonService.getPokemonsFavByUser(1);
+    if(response.ok)
+      this.pokemonsFavId = response.data
+  }
+
+  isFavorite(idPokemon: number): Observable<boolean>{
+    return of(this.pokemonsFavId.includes(idPokemon));
   }
 
   private async loadPokemons() {
-    try {
-      const nextPokemons: Pokemon[] = await this.pokemonService.getPokemons(this.offset);
-      if (nextPokemons.length > 0) {
-        this.pokemons.push(...nextPokemons); // Adiciona os próximos pokémons à lista de pokémons
-        this.offset += 20; // Incrementa o offset para a próxima página
-      }
-    } catch (error) {
-      console.error('Error loading pokémons:', error);
+    const response: CustomResponse = await this.pokemonService.getPokemons(this.search, this.limit, this.offset);
+    if (response.ok && response.data.length > 0){
+        this.pokemons.push(...response.data); // Adiciona os próximos pokémons à lista de pokémons
+        this.offset += this.limit; // Incrementa o offset para a próxima página
     }
+  }
+
+  trackByPokemonId(index: number, pokemon: any): number {
+    return pokemon.id;
   }
 
   async openModal(idPokemon: number, favorite: boolean) {
     const modal = await this.modalCtrl.create({
       component: DetailsPage,
-      componentProps: { idPokemon: idPokemon, favorite: favorite}
+      componentProps: { idPokemon: idPokemon, favorite: favorite }
     });
     await modal.present();
-    let {data, role} = await modal.onWillDismiss();
+    let { data, role } = await modal.onWillDismiss();
     this.updateFavorite(idPokemon, data)
   }
 
-  updateFavorite(idPokemon: number, favorite: any){
+  updateFavorite(idPokemon: number, favorite: any) {
     const pokemonToUpdate = this.pokemons.find(pokemon => pokemon.id === idPokemon);
-    if(pokemonToUpdate!.favorite != favorite)
+    if (pokemonToUpdate!.favorite != favorite)
       pokemonToUpdate!.favorite = favorite;
   }
-
 
   getCardGroups() {
     const groups = [];

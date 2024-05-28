@@ -10,12 +10,12 @@
 <ion-content [fullscreen]="true">
   <div id="container">
     <ion-grid>
-      <ion-row *ngFor="let cardGroup of getCardGroups()">
-        <ion-col *ngFor="let card of cardGroup" size="12" size-sm="3">
+      <ion-row *ngFor="let cardGroup of getCardGroups(); trackBy: trackByPokemonId">
+        <ion-col *ngFor="let card of cardGroup; trackBy: trackByPokemonId" size="12" size-sm="3">
           <ion-card id="card-poke" [class.favorite]="card.favorite">
             <img [alt]="card.name" [src]="card.image" style="height: 195px;" />
             <ion-button (click)="card.favorite =! card.favorite" color="warning" fill="clear" class="favorite-button">
-              <ion-icon slot="icon-only" [name]="card.favorite ? 'star' : 'star-outline'"></ion-icon>
+              <ion-icon slot="icon-only" [name]="(isFavorite(card.id) | async) ? 'star' : 'star-outline'"></ion-icon>
             </ion-button>
             <ion-button (click)="openModal(card.id, card.favorite)" class="detail-button" fill="clear">
               <ion-icon slot="icon-only" name="information-outline"></ion-icon>

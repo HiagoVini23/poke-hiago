@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { PokemonService } from '../services/PokemonService';
 import { Pokemon } from '../models/Pokemon';
+import { CustomResponse } from '../models/CustomResponse';
 
 @Component({
   selector: 'app-details',
@@ -25,7 +26,10 @@ export class DetailsPage {
   }
 
   async findPokemon(){
-    this.poke = await this.pokemonService.getPokemonById(this.idPokemon) as Pokemon
+    const response: CustomResponse = await this.pokemonService.getPokemonById(this.idPokemon) as CustomResponse
+    if (response.ok){
+      this.poke = response.data
+    }
   }
 
 }

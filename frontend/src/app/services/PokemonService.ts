@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Pokemon } from '../models/Pokemon'
+import { environment } from 'src/environments/environment';
+import { CustomResponse } from '../models/CustomResponse';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,40 +13,39 @@ import { Pokemon } from '../models/Pokemon'
 export class PokemonService {
 
   API = 'https://pokeapi.co/api/v2'
+
   constructor(private http: HttpClient) { }
 
-  async getPokemons(offset: number): Promise<any> {
+  async getPokemons(search: string, limit: number, offset: number): Promise<CustomResponse> {
+    const params = new HttpParams()
+      .set('search', search)
+      .set('limit', limit.toString())
+      .set('offset', offset.toString());
     try {
-      const response: any = await this.http.get(`${this.API}/pokemon?limit=${20}&offset=${offset}`).toPromise();
-      const pokedex: Pokemon[] = response.results.map((entry: any) => ({
-        id: this.getIdFromUrl(entry.url),
-        name: entry.name.charAt(0).toUpperCase() + entry.name.slice(1),
-        favorite: false,
-        image: './assets/pokemons/' + this.getIdFromUrl(entry.url) + '.gif'
-      }));
-      return pokedex;
+      const response: CustomResponse = await firstValueFrom(this.http.get(`${environment.backend}/pokemons`, 
+      {params: params})) as CustomResponse;
+      return response;
     } catch (error) {
-      return error
+      return { ok: false, message: 'Error Requesting Backend', data: error}
     }
   }
 
-  async getPokemonById(id: number) {
+  async getPokemonById(id: number): Promise<CustomResponse> {
     try {
-      const response: any = await this.http.get(`${this.API}/pokemon/${id}`).toPromise();
-      const pokemon: Pokemon = {
-        ...response,
-        name: response.name.charAt(0).toUpperCase() + response.name.slice(1),
-        image: './assets/pokemons/' + id + '.gif'
-      };
-      return pokemon;
+      const response: CustomResponse = await firstValueFrom(this.http.get(`${environment.backend}/pokemons/${id}`)) as CustomResponse;
+      return response;
     } catch (error) {
-      return error
+      return { ok: false, message: 'Error Requesting Backend', data: error}
     }
   }
 
-  private getIdFromUrl(url: string): number {
-    const parts = url.split('/');
-    return +parts[parts.length - 2];
+  async getPokemonsFavByUser(idUser: number): Promise<CustomResponse> {
+    try {
+      const response: CustomResponse = await firstValueFrom(this.http.get(`${environment.backend}/pokemons/favorites/${idUser}`)) as CustomResponse;
+      return response
+    } catch (error) {
+      return { ok: false, message: 'Error Requesting Backend', data: error}
+    }
   }
 
 }
