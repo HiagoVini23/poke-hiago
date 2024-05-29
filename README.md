@@ -1,6 +1,6 @@
 # PokeHiago
 
-Um site que permite listar os Pokémons existentes na API [PokeAPI](https://pokeapi.co/), favoritá-los e visualizar detalhes como peso, altura e estatísticas de batalha.
+Um site que permite criação de usuários, listagem dos Pokémons existentes na API [PokeAPI](https://pokeapi.co/), favoritá-los e visualizar detalhes como peso, altura e estatísticas de batalha.
 
 ## Getting Started
 
@@ -26,18 +26,47 @@ $ git clone https://github.com/HiagoVini23/poke-hiago.git
 ```
 $ npm install
 ```
-3. Inicie o servidor de desenvolvimento:
+3. Inicie o frontend:
 ```
 $ ionic serve
 ```
+4. Instale as dependências dentro da pasta 'backend':
+```
+$ npm install
+```
+5. Crie as váriveis de ambiente abaixo na raiz do backend e coloque seus valores entre os '<>':
+```
+BACKEND_PORT=<porta>
+ACCESS_TOKEN_SECRET=<seuToken>
+DATABASE_URL="<database>://<user>:<senha>@<endereço>:<porta>/<schema>"
+```
+6. Inicie o backend:
+```
+$ npm run dev
+```
+
 ## Estrutura de Pastas do Projeto
 
+### Frontend
 - **src**: Diretório principal do código-fonte do aplicativo Ionic.
   - **app**: Diretório que contém todas as páginas, componentes e módulos.
-    - **services**: Diretório que contém as funções que acessam a PokeAPI.
+    - **services**: Diretório que contém as funções que acessam o backend.
     - **home**: Página que lista os pokémons.
     - **details**: Página que lista os detalhes do pokémon selecionado.
-  - **assets**: Diretório onde contém o logo, fotos dos pokémons e fotos utilizadas no README.md.
+    - **login/signup**: Página de login e cadastre-se
+    - **utils**: Arquivos úteis para todo o app.
+  - **assets**: Diretório onde contém o logo e fotos dos pokémons.
+### Backend
+- **prisma**: Diretório do Prisma ORM contendo o schema e o client.
+- **src**: Diretório principal do código-fonte.
+  - **controllers**: Lógica de controle para lidar com requisições e respostas da API.
+  - **enum**: Definições de enums para tipos e constantes usados no projeto.
+  - **middlewares**: Middlewares para manipulação e verificação de requisições.
+  - **models**: Definições de modelos e esquemas de dados.
+  - **routes**: Definições das rotas da API e suas associações com controllers.
+  - **services**: Lógica de negócios e serviços de acesso aos dados.
+  - **utils**: Utilitários e funções auxiliares.
+  - **server.ts**: Arquivo de inicialização do servidor.
 
 ## Imagens
 
@@ -51,4 +80,17 @@ $ ionic serve
 
 | Mobile | Web |
 |--------|-----|
-| ![HomepagePhone](./frontend/src/assets/docs/DetailPhone.png) | ![HomepagePC](./frontend/src/assets/docs/DetailPC.png) |
+| ![DetailPhone](./frontend/src/assets/docs/DetailPhone.png) | ![DetailPC](./fotos-docs/DetailPC.png) |
+
+- Página de Login
+
+| Mobile | Web |
+|--------|-----|
+| ![LoginPhone](./frontend/src/assets/docs/LoginPhone.png) | ![LoginPC](./fotos-docs/LoginPC.png) |
+
+- Página de Cadastre-se
+
+| Mobile | Web |
+|--------|-----|
+| ![SignUpPhone](./frontend/src/assets/docs/SignUpPhone.png) | ![SignUpPC](./fotos-docs/SignUpPC.png) |
+

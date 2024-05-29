@@ -52,7 +52,7 @@ export class PokemonService {
         try {
             const response =  await axios.get(`${PokeAPI}/pokemon/${idPoke}`)
             const { stats, height, id, weight, name } = response.data;
-            const pokemon = { stats, height, id, weight, name: this.capitalize(name), 
+            const pokemon = { stats, height: height/10, id, weight: weight*0.1, name: this.capitalize(name), 
                 image: prefixImage + id + fileType };
             return { ok: true, message: "Found successfully!", data: pokemon};
         } catch (error) {

@@ -11,10 +11,10 @@
           <ion-grid>
             <ion-row>
               <ion-col>
-                Weight: {{poke?.weight}}hg
+                Peso: {{poke?.weight}}kg
               </ion-col>
               <ion-col>
-                Height: {{poke?.height}}dm
+                Altura: {{poke?.height}}m
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -28,21 +28,21 @@
                 <ion-item>
                   <ion-icon size="small" aria-hidden="true" name="heart" slot="start"></ion-icon>
                   <div class="detail-item">
-                    <ion-label>Health</ion-label>
+                    <ion-label>Vida</ion-label>
                     <ion-label>{{poke.stats[0].base_stat}}</ion-label>
                   </div>
                 </ion-item>
                 <ion-item>
                   <ion-icon size="small" aria-hidden="true" name="barbell" slot="start"></ion-icon>
                   <div class="detail-item">
-                    <ion-label>Attack</ion-label>
+                    <ion-label>Ataque</ion-label>
                     <ion-label>{{poke.stats[1].base_stat}}</ion-label>
                   </div>
                 </ion-item>
                 <ion-item>
                   <ion-icon size="small" aria-hidden="true" name="shield-half" slot="start"></ion-icon>
                   <div class="detail-item">
-                    <ion-label>Defense</ion-label>
+                    <ion-label>Defesa</ion-label>
                     <ion-label>{{poke.stats[2].base_stat}}</ion-label>
                   </div>
                 </ion-item>
@@ -51,23 +51,23 @@
             <ion-col>
               <ion-list>
                 <ion-item>
+                  <ion-icon size="small" aria-hidden="true" name="speedometer" slot="start"></ion-icon>
+                  <div class="detail-item">
+                    <ion-label>Velocidade</ion-label>
+                    <ion-label>{{poke.stats[4].base_stat}}</ion-label>
+                  </div>
+                </ion-item>
+                <ion-item>
                   <ion-icon size="small" aria-hidden="true" name="flame" slot="start"></ion-icon>
                   <div class="detail-item">
-                    <ion-label>Special Attack</ion-label>
+                    <ion-label>Ataque Especial</ion-label>
                     <ion-label>{{poke.stats[3].base_stat}}</ion-label>
                   </div>
                 </ion-item>
                 <ion-item>
                   <ion-icon size="small" aria-hidden="true" name="shield" slot="start"></ion-icon>
                   <div class="detail-item">
-                    <ion-label>Special Defense</ion-label>
-                    <ion-label>{{poke.stats[4].base_stat}}</ion-label>
-                  </div>
-                </ion-item>
-                <ion-item>
-                  <ion-icon size="small" aria-hidden="true" name="speedometer" slot="start"></ion-icon>
-                  <div class="detail-item">
-                    <ion-label>Speed</ion-label>
+                    <ion-label>Defesa Especial</ion-label>
                     <ion-label>{{poke.stats[4].base_stat}}</ion-label>
                   </div>
                 </ion-item>
