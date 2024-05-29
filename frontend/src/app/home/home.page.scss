@@ -20,14 +20,14 @@
 
 .favorite-button {
   position: absolute;
-  top: 5px; /* Distância do topo */
-  right: 5px; /* Distância da direita */
+  top: 5px; 
+  right: 5px; 
 }
 
 .detail-button {
   position: absolute;
-  top: 5px; /* Distância do topo */
-  left: 5px; /* Distância da direita */
+  top: 5px; 
+  left: 5px;
 }
 
 #card-poke{
@@ -35,12 +35,21 @@
   border-radius: 20px;
 }
 
-/* Esconda os botões por padrão */
+ion-searchbar {
+  --border-radius: 250px;
+  width: 50%;
+}
+
+@media (max-width: 768px) {
+  ion-searchbar {
+    width: 100%;
+  }
+}
+
 .favorite-button, .detail-button  {
   display: none;
 }
 
-/* Mostre o botão de favorito quando o mouse passar sobre o card */
 #card-poke:hover .favorite-button,
 #card-poke.favorite .favorite-button, 
 #card-poke:hover .detail-button 
@@ -50,5 +59,9 @@
 
 #card-poke:hover{
   bottom: 10px;
+}
+
+#container ion-searchbar{
+ // text-align: left
 }
 

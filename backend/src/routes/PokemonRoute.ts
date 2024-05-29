@@ -3,9 +3,8 @@ import express from 'express';
 const router = express.Router();
 const pokemonController = new PokemonController()
 
-router.get('/', pokemonController.findAll);
+router.get('/favorites/:idUser', pokemonController.findAllWithFavorites);
 router.get('/:id', pokemonController.findById);
-router.get('/favorites/:id', pokemonController.findFavsByUser);
 
 module.exports = router;
 export default router;

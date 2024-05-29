@@ -4,20 +4,29 @@
       <img src="../../assets/icon/favicon.png" style="width: 20px;">
       <b> PokeHiago</b>
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" shape="round">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div id="container">
     <ion-grid>
+      <div style="display: flex; justify-content: center;">
+        <ion-searchbar (ionInput)="applyFilter($event)" (ionClear)="clearFilter()"/>
+      </div>
       <ion-row *ngFor="let cardGroup of getCardGroups(); trackBy: trackByPokemonId">
         <ion-col *ngFor="let card of cardGroup; trackBy: trackByPokemonId" size="12" size-sm="3">
           <ion-card id="card-poke" [class.favorite]="card.favorite">
             <img [alt]="card.name" [src]="card.image" style="height: 195px;" />
-            <ion-button (click)="card.favorite =! card.favorite" color="warning" fill="clear" class="favorite-button">
-              <ion-icon slot="icon-only" [name]="(isFavorite(card.id) | async) ? 'star' : 'star-outline'"></ion-icon>
+            <ion-button (click)="updateFavorite(card.id, !card.favorite)" color="warning" 
+            fill="clear" class="favorite-button" shape="round">
+              <ion-icon slot="icon-only" [name]="card.favorite ? 'star' : 'star-outline'"></ion-icon>
             </ion-button>
-            <ion-button (click)="openModal(card.id, card.favorite)" class="detail-button" fill="clear">
+            <ion-button shape="round" (click)="openModal(card.id, card.favorite)" class="detail-button" fill="clear">
               <ion-icon slot="icon-only" name="information-outline"></ion-icon>
             </ion-button>
             <ion-card-header>
@@ -28,7 +37,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+  <ion-infinite-scroll  (ionInfinite)="onIonInfinite($event)">
     <ion-infinite-scroll-content loadingText="Please wait..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

@@ -1,37 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Pokemon } from '../models/Pokemon'
 import { environment } from 'src/environments/environment';
 import { CustomResponse } from '../models/CustomResponse';
-import { firstValueFrom } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class PokemonService {
+export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  async getPokemonsWithFavorites(search: string, limit: number, offset: number,
-     idUser: number = 1): Promise<CustomResponse> {
-    const params = new HttpParams()
-      .set('search', search)
-      .set('limit', limit.toString())
-      .set('offset', offset.toString());
+  async setPokemonFavorite(idUser: number, idPokemon: number): Promise<CustomResponse> {
     try {
       const response: CustomResponse = await firstValueFrom(this.http
-        .get(`${environment.backend}/pokemons/favorites/${idUser}`,{params: params})) as CustomResponse;
+        .post(`${environment.backend}/users/fav/${idUser}/${idPokemon}`, {})) as CustomResponse;
       return response;
     } catch (error) {
       return { ok: false, message: 'Error Requesting Backend', data: error}
     }
   }
-
-  async getPokemonById(id: number): Promise<CustomResponse> {
+  
+  async unsetPokemonFavorite(idUser: number, idPokemon: number): Promise<CustomResponse> {
     try {
       const response: CustomResponse = await firstValueFrom(this.http
-        .get(`${environment.backend}/pokemons/${id}`)) as CustomResponse;
+        .delete(`${environment.backend}/users/unfav/${idUser}/${idPokemon}`)) as CustomResponse;
       return response;
     } catch (error) {
       return { ok: false, message: 'Error Requesting Backend', data: error}
