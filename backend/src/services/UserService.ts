@@ -28,9 +28,9 @@ export class UserService {
             const createdUser = await prisma.user.create({ data: user })
             return { ok: true, message: "Created successfully!", data: createdUser };
         } catch (error: any) {
-            console.log(error)
-            if (error.meta.target.includes("email"))
+            if (error.meta.target.includes("email")){
                 return { ok: false, message: "Email already exists", data: TypeErrorsEnum.AlreadyExists };
+            }
             return { ok: false, message: "Internal error!", data: TypeErrorsEnum.Internal };
         }
     }

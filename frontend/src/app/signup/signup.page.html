@@ -7,9 +7,8 @@
       </ion-card-title>
       <ion-card-subtitle> Venha criar sua lista de Pokémons favoritos! </ion-card-subtitle>
     </ion-card-header>
-
-    <ion-card-content>
-      <form [formGroup]="signUpForm" (ngSubmit)="signUp()" #formDir="ngForm">
+    <form [formGroup]="signUpForm" (ngSubmit)="signUp()" #formDir="ngForm">
+      <ion-card-content>
         <ion-input required errorText="Preencha o nome" type="text" fill="outline" label="Nome" formControlName="name">
         </ion-input>
         <ion-input required errorText="Preencha o apelido" type="text" fill="outline" label="Apelido"
@@ -22,14 +21,14 @@
             <ion-input-password-toggle color="dark" slot="end"></ion-input-password-toggle>
           </ion-input>
         </div>
-      </form>
-    </ion-card-content>
+      </ion-card-content>
 
-    <ion-toolbar>
-      <ion-buttons slot="end">
-        <ion-button shape="round" routerLink="/login">VOLTAR</ion-button>
-        <ion-button shape="round" fill="solid" [disabled]="!signUpForm.valid" (click)="signUp()">CADASTRAR</ion-button>
-      </ion-buttons>
-    </ion-toolbar>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-button shape="round" routerLink="/login">VOLTAR</ion-button>
+          <ion-button type="submit" shape="round" fill="solid" [disabled]="!signUpForm.valid">CADASTRAR</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </form>
   </ion-card>
 </div>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule,ReactiveFormsModule, FormControl  } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { UserService } from '../services/user.service';
+import { UtilsService } from '../utils/utils.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +13,8 @@ import { FormBuilder, FormGroup, Validators, FormsModule,ReactiveFormsModule, Fo
 export class SignupPage implements OnInit {
   signUpForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private userService: UserService, 
+    private utilsService: UtilsService, private router: Router) { }
 
   ngOnInit() {
     this.signUpForm = this.fb.group({
@@ -21,15 +25,22 @@ export class SignupPage implements OnInit {
     });
   }
 
-  signUp(){
+  async signUp() {
     if (this.signUpForm.valid) {
-    /*userService.signUp(
-      {
-        email: this.email,
-        password: this.password,
-        name: this.name,
-        nickname: this.nickname
-      })*/
+      const response = await this.userService.createUser(
+        {
+          email: this.email.toLowerCase(),
+          password: this.password,
+          name: this.name,
+          nickname: this.nickname
+        })
+      if (response.ok){
+        this.utilsService.presentToast('Cadastrado com sucesso!', 'checkmark-outline', 'success')
+        this.router.navigate(['/login']);
+      }
+      else if(response.status == 400){
+        this.utilsService.presentToast('Email já está cadastrado!', 'close-outline', 'danger')
+      }
     }
   }
 

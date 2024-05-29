@@ -1,7 +1,7 @@
 require("dotenv").config();
 import express from 'express';
-import UserRoutes from './routes/UserRoute';
-import PokemonRoutes from './routes/PokemonRoute';
+import UserRoutes from './routes/UserRoutes';
+import PokemonRoutes from './routes/PokemonRoutes';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 const corsOptions = {

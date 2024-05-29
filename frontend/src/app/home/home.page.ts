@@ -1,31 +1,53 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfiniteScrollCustomEvent, IonContent, IonInfiniteScroll, ModalController } from '@ionic/angular';
-import { PokemonService } from '../services/PokemonService';
+import { InfiniteScrollCustomEvent, IonContent, IonInfiniteScroll, LoadingController, ModalController } from '@ionic/angular';
+import { PokemonService } from '../services/pokemon.service';
 import { Pokemon } from '../models/Pokemon';
 import { DetailsPage } from '../details/details.page';
 import { CustomResponse } from '../models/CustomResponse';
-import { UserService } from '../services/UserService';
+import { UserService } from '../services/user.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
   pokemons: Pokemon[] = [];
   offset = 0;
   search = '';
   limit = 50
   pokemonsFavId: number[] = []
-  hasMorePokemons: boolean = true;
+  idUserLog: number = 0
   @ViewChild('modal', { static: true }) modal: any;
 
   constructor(private pokemonService: PokemonService, private userService: UserService,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController, private authService: AuthenticationService,
+    private loadingController: LoadingController) {
   }
 
-  async ngOnInit() {
-    this.loadPokemons();
+  async ionViewWillEnter() {
+    await this.presentLoading();
+    try {
+      this.idUserLog = (await this.authService.getLogUser()).id;
+      await this.loadPokemons();
+    } finally {
+      await this.loadingController.dismiss()
+    }
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Carregando...',
+      spinner: 'circles'
+    });
+    await loading.present();
+  }
+
+
+  logout(){
+    this.authService.logout();
   }
 
   async applyFilter(event: Event) {
@@ -39,20 +61,20 @@ export class HomePage implements OnInit {
   }
 
   async findPokemons(search: string, limit: number, offset: number) {
-    const response: CustomResponse = await this.pokemonService.getPokemonsWithFavorites(search, limit, offset);
+    const response: CustomResponse = await this.pokemonService
+    .getPokemonsWithFavorites(search, limit, offset, this.idUserLog);
     if (response.ok && response.data.length > 0) {
       this.pokemons = response.data;
     }
   }
 
   private async loadPokemons() {
-    const response: CustomResponse = await this.pokemonService.getPokemonsWithFavorites(this.search, this.limit, this.offset);
+    const response: CustomResponse = await this.pokemonService
+    .getPokemonsWithFavorites(this.search, this.limit, this.offset, this.idUserLog);
     if (response.ok && response.data.length > 0) {
       this.pokemons.push(...response.data); // Adiciona os próximos pokémons à lista de pokémons
       this.offset += this.limit; // Incrementa o offset para a próxima página
-      this.hasMorePokemons = true
     }
-    this.hasMorePokemons = false;
   }
 
   trackByPokemonId(index: number, pokemon: any): number {
@@ -74,9 +96,9 @@ export class HomePage implements OnInit {
     if (pokemonToUpdate!.favorite != favorite) {
       pokemonToUpdate!.favorite = favorite;
       if (favorite)
-        this.userService.setPokemonFavorite(1, idPokemon)
+        this.userService.setPokemonFavorite(this.idUserLog, idPokemon)
       else {
-        this.userService.unsetPokemonFavorite(1, idPokemon)
+        this.userService.unsetPokemonFavorite(this.idUserLog, idPokemon)
       }
     }
   }

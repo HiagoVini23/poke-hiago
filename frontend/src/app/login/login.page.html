@@ -7,27 +7,21 @@
       </ion-card-title>
       <ion-card-subtitle> Bem vindo ao PokeHiago </ion-card-subtitle>
     </ion-card-header>
-  
-    <ion-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="login()" #formDir="ngForm">
-        <ion-input
-          type="email"
-          fill="outline"
-          label="Email"
-          errorText="Email inválido"
-          formControlName="email"
-        ></ion-input>
-        <ion-input required errorText="Preencha a senha" type="password" fill="outline" label="Senha" formControlName="password">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" #formDir="ngForm">
+      <ion-card-content>
+        <ion-input type="email" fill="outline" label="Email" errorText="Email inválido"
+          formControlName="email"></ion-input>
+        <ion-input required errorText="Preencha a senha" type="password" fill="outline" label="Senha"
+          formControlName="password">
           <ion-input-password-toggle color="dark" slot="end"></ion-input-password-toggle>
         </ion-input>
-      </form>
-    </ion-card-content>
-  
-    <ion-toolbar>
-      <ion-buttons slot="end">
-        <ion-button shape="round" routerLink="/signup" >CADASTRE-SE</ion-button>
-        <ion-button shape="round" fill="solid" [disabled]="!loginForm.valid" (click)="login()">ENTRAR</ion-button>
-      </ion-buttons>
-    </ion-toolbar>
+      </ion-card-content>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-button shape="round" routerLink="/signup">CADASTRE-SE</ion-button>
+          <ion-button type="submit" shape="round" fill="solid" [disabled]="!loginForm.valid">ENTRAR</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </form>
   </ion-card>
 </div>

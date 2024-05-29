@@ -31,7 +31,10 @@ export class PokemonService {
                 where: {
                     id: pokemon.id
                 },
-                update:{},
+                update:{
+                    id: pokemon.id,
+                    name: pokemon.name
+                },
                 create: {
                     id: pokemon.id,
                     name: pokemon.name
@@ -51,7 +54,6 @@ export class PokemonService {
             const { stats, height, id, weight, name } = response.data;
             const pokemon = { stats, height, id, weight, name: this.capitalize(name), 
                 image: prefixImage + id + fileType };
-
             return { ok: true, message: "Found successfully!", data: pokemon};
         } catch (error) {
             console.error(error);

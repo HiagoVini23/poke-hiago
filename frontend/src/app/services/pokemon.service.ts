@@ -14,7 +14,7 @@ export class PokemonService {
   constructor(private http: HttpClient) { }
 
   async getPokemonsWithFavorites(search: string, limit: number, offset: number,
-     idUser: number = 1): Promise<CustomResponse> {
+     idUser: number): Promise<any> {
     const params = new HttpParams()
       .set('search', search)
       .set('limit', limit.toString())
@@ -24,17 +24,17 @@ export class PokemonService {
         .get(`${environment.backend}/pokemons/favorites/${idUser}`,{params: params})) as CustomResponse;
       return response;
     } catch (error) {
-      return { ok: false, message: 'Error Requesting Backend', data: error}
+      return error
     }
   }
 
-  async getPokemonById(id: number): Promise<CustomResponse> {
+  async getPokemonById(id: number): Promise<any> {
     try {
       const response: CustomResponse = await firstValueFrom(this.http
         .get(`${environment.backend}/pokemons/${id}`)) as CustomResponse;
       return response;
     } catch (error) {
-      return { ok: false, message: 'Error Requesting Backend', data: error}
+      return error
     }
   }
 

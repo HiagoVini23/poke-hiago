@@ -5,7 +5,7 @@
       <b> PokeHiago</b>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button fill="clear" shape="round">
+      <ion-button fill="clear" (click)="logout()" shape="round">
         <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -37,8 +37,8 @@
       </ion-row>
     </ion-grid>
   </div>
-  <ion-infinite-scroll  (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content loadingText="Please wait..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content loadingText="Please wait..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
 

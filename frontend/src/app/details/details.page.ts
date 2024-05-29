@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { PokemonService } from '../services/PokemonService';
+import { PokemonService } from '../services/pokemon.service';
 import { Pokemon } from '../models/Pokemon';
 import { CustomResponse } from '../models/CustomResponse';
 
