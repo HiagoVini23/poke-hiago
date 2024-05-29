@@ -74,23 +74,23 @@ $ npm run dev
 
 | Mobile | Web |
 |--------|-----|
-| ![HomepagePhone](./frontend/src/assets/docs/HomePhone.png) | ![HomepagePC](./frontend/src/assets/docs/HomePC.png) |
+| ![HomepagePhone](./fotos-docs/HomePhone.png) | ![HomepagePC](./fotos-docs/HomePC.png) |
 
 - Página de detalhe de um Pokémon:
 
 | Mobile | Web |
 |--------|-----|
-| ![DetailPhone](./frontend/src/assets/docs/DetailPhone.png) | ![DetailPC](./fotos-docs/DetailPC.png) |
+| ![DetailPhone](./fotos-docs/DetailPhone.png) | ![DetailPC](./fotos-docs/DetailPC.png) |
 
 - Página de Login
 
 | Mobile | Web |
 |--------|-----|
-| ![LoginPhone](./frontend/src/assets/docs/LoginPhone.png) | ![LoginPC](./fotos-docs/LoginPC.png) |
+| ![LoginPhone](./fotos-docs/LoginPhone.png) | ![LoginPC](./fotos-docs/LoginPC.png) |
 
 - Página de Cadastre-se
 
 | Mobile | Web |
 |--------|-----|
-| ![SignUpPhone](./frontend/src/assets/docs/SignUpPhone.png) | ![SignUpPC](./fotos-docs/SignUpPC.png) |
+| ![SignUpPhone](./fotos-docs/SignUpPhone.png) | ![SignUpPC](./fotos-docs/SignUpPC.png) |
 
