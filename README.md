@@ -1,6 +1,6 @@
 # PokeHiago
 
-Um site que permite criação de usuários, listagem dos Pokémons existentes na API [PokeAPI](https://pokeapi.co/), favoritá-los e visualizar detalhes como peso, altura e estatísticas de batalha.
+PokeHiago é uma plataforma interativa que permite criar usuários e explorar detalhadamente o universo Pokémon. Utilizando a API [PokeAPI](https://pokeapi.co/), o site lista todos os Pokémons, permitindo favoritá-los e visualizar informações como peso, altura e estatísticas de batalha. Qualquer pessoa pode se cadastrar de forma segura, com senhas criptografadas por bcrypt e autenticação via tokens JWT. O backend, desenvolvido em NodeJS, acessa a [PokeAPI](https://pokeapi.co/) e o banco de dados MySQL, criando rotas para o frontend. Desenvolvido em Ionic e Angular, o frontend gerencia a interação com o usuário, proporcionando uma experiência fluida e envolvente.
 
 ## Getting Started
 
