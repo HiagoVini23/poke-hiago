@@ -13,7 +13,7 @@ Antes de começar, certifique-se de ter instalado os seguintes itens:
 - [Node.js](https://nodejs.org/) v18
 - [Ionic Framework](https://ionicframework.com/) v7.2
 - [Angular](https://angular.io/) v17
-- [MySQL(https://www.mysql.com/)] v8
+- [MySQL](https://www.mysql.com/) v8
 
 ### Instalação
 
@@ -27,7 +27,7 @@ $ git clone https://github.com/HiagoVini23/poke-hiago.git
 ```
 $ npm install
 ```
-3. Em src/environment.ts coloque a referência ao backend local:
+3. Em src/environment.ts coloque a referência ao backend local e coloque seus valores entre os '<>':
 ```
 $ backend: 'http://localhost:<porta>'
 ```
