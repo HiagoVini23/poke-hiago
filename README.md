@@ -13,6 +13,7 @@ Antes de começar, certifique-se de ter instalado os seguintes itens:
 - [Node.js](https://nodejs.org/) v18
 - [Ionic Framework](https://ionicframework.com/) v7.2
 - [Angular](https://angular.io/) v17
+- [MySQL(https://www.mysql.com/)] v8
 
 ### Instalação
 
@@ -26,21 +27,29 @@ $ git clone https://github.com/HiagoVini23/poke-hiago.git
 ```
 $ npm install
 ```
-3. Inicie o frontend:
+3. Em src/environment.ts coloque a referência ao backend local:
+```
+$ backend: 'http://localhost:<porta>'
+```
+4. Inicie o frontend:
 ```
 $ ionic serve
 ```
-4. Instale as dependências dentro da pasta 'backend':
+5. Instale as dependências dentro da pasta 'backend':
 ```
 $ npm install
 ```
-5. Crie as váriveis de ambiente abaixo na raiz do backend e coloque seus valores entre os '<>':
+6. Crie as váriveis de ambiente (arquivo .env) abaixo na raiz do backend e coloque seus valores entre os '<>':
 ```
 BACKEND_PORT=<porta>
 ACCESS_TOKEN_SECRET=<seuToken>
 DATABASE_URL="<database>://<user>:<senha>@<endereço>:<porta>/<schema>"
 ```
-6. Inicie o backend:
+7. Aplique as migrations para criar o banco e suas tabelas:
+```
+$ npx prisma migrate dev
+```
+8. Inicie o backend:
 ```
 $ npm run dev
 ```
