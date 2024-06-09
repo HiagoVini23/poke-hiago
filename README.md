@@ -23,35 +23,40 @@ Siga estas etapas para instalar e executar o projeto localmente:
 ```
 $ git clone https://github.com/HiagoVini23/poke-hiago.git
 ```
-2. Instale as dependências dentro da pasta 'frontend':
+#### Backend
+
+2. Instale as dependências:
 ```
 $ npm install
 ```
-3. Em src/environment.ts coloque a referência ao backend local e coloque seus valores entre os '<>':
-```
-$ backend: 'http://localhost:<porta>'
-```
-4. Inicie o frontend:
-```
-$ ionic serve
-```
-5. Instale as dependências dentro da pasta 'backend':
-```
-$ npm install
-```
-6. Crie as váriveis de ambiente (arquivo .env) abaixo na raiz do backend e coloque seus valores entre os '<>':
+3. Crie as váriveis de ambiente (arquivo .env) na raiz do backend e coloque seus valores entre os '<>':
 ```
 BACKEND_PORT=<porta>
 ACCESS_TOKEN_SECRET=<seuToken>
 DATABASE_URL="<database>://<user>:<senha>@<endereço>:<porta>/<schema>"
 ```
-7. Aplique as migrations para criar o banco e suas tabelas:
+4. Aplique as migrations para criar o banco e suas tabelas:
 ```
 $ npx prisma migrate dev
 ```
-8. Inicie o backend:
+5. Inicie o backend:
 ```
 $ npm run dev
+```
+
+#### Frontend
+
+6. Instale as dependências:
+```
+$ npm install
+```
+7. Em 'src/environments/environment.ts' coloque a referência ao backend e coloque seus valores entre os '<>':
+```
+$ backend: 'http://localhost:<porta>'
+```
+8. Inicie o frontend:
+```
+$ ionic serve
 ```
 
 ## Estrutura de Pastas do Projeto
