@@ -38,6 +38,9 @@
 ion-searchbar {
   --border-radius: 250px;
   width: 50%;
+  position: fixed;
+  top: 10;
+  z-index: 999; /* Mantém a barra de pesquisa acima de outros elementos */
 }
 
 @media (max-width: 768px) {

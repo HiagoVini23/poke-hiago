@@ -21,6 +21,7 @@ export class HomePage {
   pokemonsFavId: number[] = []
   idUserLog: number = 0
   @ViewChild('modal', { static: true }) modal: any;
+  @ViewChild(IonContent) content!: IonContent; 
 
   constructor(private pokemonService: PokemonService, private userService: UserService,
     private modalCtrl: ModalController, private authService: AuthenticationService,
@@ -35,6 +36,10 @@ export class HomePage {
     } finally {
       await this.loadingController.dismiss()
     }
+  }
+
+  scrollToTop() {
+    this.content.scrollToTop(400);
   }
 
   async presentLoading() {
