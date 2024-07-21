@@ -38,6 +38,7 @@ export class AuthenticationService {
           return true;
         })
         .catch((err) => {
+          console.log(err)
           this.token = '';
           return false;
         });

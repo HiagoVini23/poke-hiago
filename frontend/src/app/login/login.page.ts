@@ -32,6 +32,7 @@ export class LoginPage implements OnInit {
   async login() {
     if (this.loginForm.valid) {
       const response = await this.authService.login({ email: this.email, password: this.password })
+      console.log(response)
       if (response) {
         this.router.navigate(['/home']);
       }

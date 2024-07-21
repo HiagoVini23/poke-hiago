@@ -11,14 +11,18 @@ const extractToken = (req: Request) => {
 export class AuthenticationService {
   validate(request: Request, response: Response, next: NextFunction) {
     const token = extractToken(request);
-
-    if (!token)
+    if (!token){
       return response
         .status(401)
         .json({ auth: false, message: "No token provided." });
+    }
     try {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string);
-        return response.status(200).json({auth: true, message: 'User is authenticated'})
+        if(!request.url.includes('/validate/valid'))
+          next();
+        else
+          return response.status(200).json({auth: true, message: 'User is authenticated'})
+  
     } catch (err) {
       if (err instanceof TokenExpiredError) {
         return response
