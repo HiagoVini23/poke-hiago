@@ -21,7 +21,7 @@ export class HomePage {
   pokemonsFavId: number[] = []
   idUserLog: number = 0
   @ViewChild('modal', { static: true }) modal: any;
-  @ViewChild(IonContent) content!: IonContent; 
+  @ViewChild(IonContent, { static: false }) content!: IonContent;
 
   constructor(private pokemonService: PokemonService, private userService: UserService,
     private modalCtrl: ModalController, private authService: AuthenticationService,

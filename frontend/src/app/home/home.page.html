@@ -1,29 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      <img src="../../assets/icon/favicon.png" style="width: 20px;">
-      <b> PokeHiago</b>
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button fill="clear" (click)="logout()" shape="round">
-        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="auto">
+          <img src="../../assets/icon/favicon.png" style="width: 20px;">
+          <b id="nome"> PokeHiago</b>
+        </ion-col>
+        <ion-col style="display: flex; justify-content: center; ">
+          <ion-searchbar placeholder="Pesquisar" (ionInput)="applyFilter($event)"
+            (ionClear)="clearFilter()"></ion-searchbar>
+        </ion-col>
+        <ion-col size="auto">
+            <ion-button fill="clear" (click)="logout()" shape="round">
+              <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+            </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div id="container">
-    <div style="display: flex; justify-content: center; background-color:transparent;">
-      <ion-searchbar placeholder="Pesquisar" (ionInput)="applyFilter($event)" (ionClear)="clearFilter()"/>
-    </div>
     <ion-grid>
       <ion-row *ngFor="let cardGroup of getCardGroups(); trackBy: trackByPokemonId">
         <ion-col *ngFor="let card of cardGroup; trackBy: trackByPokemonId" size="12" size-sm="3">
           <ion-card id="card-poke" [class.favorite]="card.favorite">
             <img [alt]="card.name" [src]="card.image" style="height: 195px;" />
-            <ion-button (click)="updateFavorite(card.id, !card.favorite)" color="warning" 
-            fill="clear" class="favorite-button" shape="round">
+            <ion-button (click)="updateFavorite(card.id, !card.favorite)" color="warning" fill="clear"
+              class="favorite-button" shape="round">
               <ion-icon slot="icon-only" [name]="card.favorite ? 'star' : 'star-outline'"></ion-icon>
             </ion-button>
             <ion-button shape="round" (click)="openModal(card.id, card.favorite)" class="detail-button" fill="clear">
@@ -37,13 +42,12 @@
       </ion-row>
     </ion-grid>
   </div>
-    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-      <ion-infinite-scroll-content loadingText="Please wait..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-    <ion-fab  slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button (click)="scrollToTop()">
-        <ion-icon name="chevron-up-circle"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Please wait..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="scrollToTop()">
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
-

@@ -14,6 +14,34 @@
   margin: 0;
 }
 
+ion-toolbar {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+ion-grid {
+  padding: 0;
+}
+
+#mobile-searchbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #pc-searchbar {
+    display: none !important; /* Use !important to ensure it overrides other styles */
+  }
+
+  #mobile-searchbar {
+    display: flex !important; /* Use !important to ensure it overrides other styles */
+  }
+}
+
+
+ion-searchbar {
+  --background: transparent;
+}
+
 #container a {
   text-decoration: none;
 }
@@ -35,12 +63,15 @@
   border-radius: 20px;
 }
 
+@media (max-width: 768px){
+  #nome{
+    display: none;
+  }
+}
+
 ion-searchbar {
   --border-radius: 250px;
   width: 50%;
-  position: fixed;
-  top: 10;
-  z-index: 999; /* Mantém a barra de pesquisa acima de outros elementos */
 }
 
 @media (max-width: 768px) {
